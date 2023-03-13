@@ -1,29 +1,20 @@
-export default function orderByProps(obj, props) {
-  const result = [];
-  for (const key in obj) {
-    if (obj.hasOwnProperty.call(obj, key)) {
-      result.push({ key, value: obj[key] });
-    }
+/* eslint-disable import/prefer-default-export */
+export function toCaseSpecialAttack(obj) {
+  if (Object.hasOwnProperty.call(obj, 'special')) {
+    return obj.special.map((skill) => {
+      const {
+        id,
+        name,
+        icon,
+        description = 'Описание недоступно',
+      } = skill;
+      return {
+        id,
+        name,
+        icon,
+        description,
+      };
+    });
   }
-
-  const max = props.length;
-  result.sort((a, b) => {
-    let aOrder = props.indexOf(a.key);
-    if (aOrder < 0) {
-      aOrder = max;
-    }
-    let bOrder = props.indexOf(b.key);
-    if (bOrder < 0) {
-      bOrder = max;
-    }
-    if (aOrder !== bOrder) {
-      return aOrder - bOrder;
-    }
-    if (a.key > b.key) {
-      return 1;
-    }
-    return -1;
-  });
-
-  return result;
+  return false;
 }
